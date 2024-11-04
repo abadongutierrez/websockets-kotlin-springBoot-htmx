@@ -1,0 +1,11 @@
+<form id="form" ws-send hx-on:htmx:ws-after-send="document.querySelector('input[name=message]').value='';">
+    <input name="type" value="chat_message" type="hidden" />
+    <input name="message" />
+    <button type="submit">Submit</button>
+</form>
+
+<div id="chat_room" hx-swap-oob="beforeend">
+    <div class="green">{{message}}</div>
+</div>
+
+<div id="title" hx-swap-oob="true"><h1>Chat</h1></div>

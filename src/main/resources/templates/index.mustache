@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Chat with HTMX</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+    <style>
+        .green {
+            color: green;
+        }
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="title"><h1>Hello, tell us your name and let's chat</h1></div>
+    <div hx-ext="ws" ws-connect="/wsHandler">
+        <div id="chat_room">
+        </div>
+        <form id="form" ws-send>
+            <input name="type" value="chat_new_join" type="hidden" />
+            <input name="name" />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
