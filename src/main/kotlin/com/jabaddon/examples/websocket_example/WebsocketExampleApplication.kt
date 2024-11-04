@@ -82,6 +82,11 @@ class TemplateRenderer(
 	fun renderUserJoin(name: String): String {
 		return newJoinTemplate.execute(mapOf("message" to "User $name joined"))
 	}
+
+	fun renderConnectedUsers(users: MutableCollection<User>): String {
+		val usersString = users.joinToString(", ") { "${it.name} (${it.id})" }
+		return chatMessageTemplate.execute(mapOf("message" to "Connected users: $usersString", "color" to "green"))
+	}
 }
 
 /**
@@ -118,6 +123,7 @@ class WSHandler(
 				val user = User(uids.getAndIncrement(), name)
 				sessionList.put(session, user)
 				broadcast(templateRenderer.renderUserJoin(name))
+				broadcast(templateRenderer.renderConnectedUsers(sessionList.values))
 				session.sendMessage(TextMessage(templateRenderer.renderChatMessage("Welcome $name")))
 			}
 			else -> {

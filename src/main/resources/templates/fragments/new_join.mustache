@@ -1,4 +1,4 @@
-<form id="form" ws-send hx-on:htmx:ws-after-send="document.querySelector('input[name=message]').value='';">
+<form id="form" ws-send hx-on:htmx:ws-after-send="this.querySelector('input[name=message]').value='';">
     <input name="type" value="chat_message" type="hidden" />
     <input name="message" />
     <button type="submit">Submit</button>
